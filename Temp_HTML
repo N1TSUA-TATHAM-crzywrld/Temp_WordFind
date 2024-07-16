@@ -1,0 +1,54 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scrambler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #6a5acd;
+        }
+        .word-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Scrambler</h1>
+
+        <div class="word-container">
+            <h2>Original Word 1:</h2>
+            <p>{{ pre_shuff_1 }}</p>
+        </div>
+        <div class="word-container">
+            <h2>Original Word 2:</h2>
+            <p>{{ pre_shuff_2 }}</p>
+        </div>
+
+        <form action="/process" method="POST">
+            <input type="submit" value="OK" />
+        </form>
+
+        <form action="/results" method="POST">
+            <input type="submit" value="GET" />
+        </form>
+
+    </div>
+</body>
+</html>
