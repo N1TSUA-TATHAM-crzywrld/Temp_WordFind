@@ -1,0 +1,93 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scrambler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #6a5acd;
+        }
+        .word-container {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#okBtn').click(function() {
+                $.ajax({
+                    url: '/process',
+                    type: 'POST',
+                    success: function(response) {
+                        $('#pre_shuff_1').text(response.pre_shuff_1);
+                        $('#pre_shuff_2').text(response.pre_shuff_2);
+                        $('#shuff_output_1').text(response.shuff_output_1);
+                        $('#shuff_output_2').text(response.shuff_output_2);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            $('#getBtn').click(function() {
+                $.ajax({
+                    url: '/results',
+                    type: 'POST',
+                    success: function(response) {
+                        $('#pre_shuff_1').text(response.pre_shuff_1);
+                        $('#pre_shuff_2').text(response.pre_shuff_2);
+                        $('#shuff_output_1').text('');
+                        $('#shuff_output_2').text('');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Scrambler</h1>
+
+        <div class="word-container">
+            <h2>Original Word 1:</h2>
+            <p id="pre_shuff_1">{{ pre_shuff_1 }}</p>
+        </div>
+        <div class="word-container">
+            <h2>Original Word 2:</h2>
+            <p id="pre_shuff_2">{{ pre_shuff_2 }}</p>
+        </div>
+
+        <button id="okBtn">OK</button>
+        <button id="getBtn">GET</button>
+
+        <div class="word-container">
+            <h2>Shuffled Word 1:</h2>
+            <p id="shuff_output_1"></p>
+        </div>
+        <div class="word-container">
+            <h2>Shuffled Word 2:</h2>
+            <p id="shuff_output_2"></p>
+        </div>
+    </div>
+</body>
+</html>
